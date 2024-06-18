@@ -1,0 +1,497 @@
+alexnet_baseline: &base
+  model_name: 'alexnet'
+  pooling: 'original'
+  adaptive: false
+  num_epochs: 25
+  lr: !!float 1e-4
+  dataset:
+    dataset_name: 'CIFAR10'
+    batch_size: 100
+  device_name: "cuda:1"
+
+alexnet_modified:
+  <<: *base
+  pooling: 'avg_max'
+
+alexnet_reweighted:
+  <<: *base
+  pooling: 'weighted_avg_max'
+
+vgg_baseline:
+  <<: *base
+  model_name: 'vgg'
+
+vgg_modified:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'avg_max'
+
+vgg_reweighted:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'weighted_avg_max'
+
+vgg_baseline_adaptive:
+  <<: *base
+  adaptive: true
+  model_name: 'vgg'
+  device_name: 'cuda:1'
+
+vgg_modified_adaptive:
+  <<: *base
+  adaptive: true
+  model_name: 'vgg'
+  pooling: 'avg_max'
+
+vgg_reweighted_adaptive:
+  <<: *base
+  adaptive: true
+  model_name: 'vgg'
+  pooling: 'weighted_avg_max'
+
+concat_test:
+  <<: *base
+#  adaptive: true
+  concat: true
+  model_name: 'vgg'
+#  pooling: 'weighted_avg_max'
+
+
+vgg_test:
+  <<: *base
+  adaptive: true
+  model_name: 'vgg'
+  pooling: 'avg_max'
+
+sigmoid_avg_max:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'sigmoid_avg_max'
+
+softmax_poling:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'softmax_custom'
+
+softmax_poling_init_max:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'softmax_custom'
+  device_name: 'cuda:1'
+
+softmax_poling_init_avg:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'softmax_custom'
+  device_name: 'cuda:1'
+
+geometric_mean:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'geometric_mean'
+  device_name: 'cuda:1'
+
+harmonic_mean:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'harmonic_mean'
+  device_name: 'cuda:0'
+
+weighted_avg_max:
+  <<: *base
+  model_name: 'vgg'
+  pooling: 'weighted_avg_max'
+  device_name: 'cuda:0'
+
+custom_cnn_baseline:
+  <<: *base
+  model_name: 'custom_cnn'
+  pooling: 'original'
+  device_name: 'cuda:0'
+
+custom_cnn_weighted_avg_max:
+  <<: *base
+  model_name: 'custom_cnn'
+  pooling: 'weighted_avg_max'
+  device_name: 'cuda:0'
+
+custom_cnn_sigmoid_avg_max:
+  <<: *base
+  model_name: 'custom_cnn'
+  pooling: 'sigmoid_avg_max'
+  device_name: 'cuda:0'
+
+custom_cnn_softmax_custom:
+  <<: *base
+  model_name: 'custom_cnn'
+  pooling: 'softmax_custom'
+  device_name: 'cuda:0'
+
+custom_cnn_geometric_mean:
+  <<: *base
+  model_name: 'custom_cnn'
+  pooling: 'geometric_mean'
+  device_name: 'cuda:0'
+
+custom_cnn_harmonic_mean:
+  <<: *base
+  model_name: 'custom_cnn'
+  pooling: 'softmax_custom'
+  device_name: 'cuda:0'
+
+custom_cnn_fix_adaptive:
+  <<: *base
+  model_name: 'custom_cnn'
+  pooling: 'fix_adaptive'
+  device_name: 'cuda:0'
+
+custom_cnn_mnist_baseline:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 3
+  pooling: 'softmax_custom'
+  dataset:
+    dataset_name: 'mnist'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+custom_cnn_fashion_mnist_baseline:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 10
+  pooling: 'softmax_custom'
+  dataset:
+    dataset_name: 'fashion_mnist'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+custom_cnn_fashion_mnist:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 40
+  dataset:
+    dataset_name: 'fashion_mnist'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+
+custom_cnn_SVHN:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 40
+  dataset:
+    dataset_name: 'SVHN'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+custom_cnn_SVHN_80:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 35
+  pooling: 'softmax_custom'
+  dataset:
+    dataset_name: 'SVHN'
+    batch_size: 64
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+
+
+baseline_SVHN_44:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 35
+  pooling: 'original'
+  dataset:
+    dataset_name: 'SVHN'
+    batch_size: 64
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+
+
+baseline_SVHN_orig:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 40
+  pooling: 'original'
+  dataset:
+    dataset_name: 'SVHN'
+    batch_size: 50
+  device_name: "cuda:0"
+  lr: !!float 1e-5
+
+SVHN_avg:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 40
+  pooling: 'original'
+  dataset:
+    dataset_name: 'SVHN'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+
+SVHN_avg_max: &SVHN
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 80
+  pooling: 'avg_max'
+  dataset:
+    dataset_name: 'SVHN'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+SVHN_weighted_avg_max:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 40
+  pooling: 'weighted_avg_max'
+  dataset:
+    dataset_name: 'SVHN'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+SVHN_sigmoid_avg_max:
+  <<: *SVHN
+  pooling: 'sigmoid_avg_max'
+  device_name: "cuda:0"
+
+
+SVHN_softmax_custom:
+  <<: *SVHN
+  pooling: 'softmax_custom'
+  device_name: "cuda:0"
+
+
+SVHN_geometric_mean:
+  <<: *SVHN
+  pooling: 'geometric_mean'
+  device_name: "cuda:1"
+
+SVHN_harmonic_mean:
+  <<: *SVHN
+  pooling: 'harmonic_mean'
+  device_name: "cuda:0"
+
+SVHN_fix_adaptive:
+  <<: *SVHN
+  pooling: 'fix_adaptive'
+  device_name: "cuda:1"
+
+
+
+
+
+cifar10_:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 800
+  pooling: 'original'
+  dataset:
+    dataset_name: 'CIFAR10'
+    batch_size: 64
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+cifar100_44:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 100
+  pooling: 'original'
+  dataset:
+    dataset_name: 'CIFAR100'
+    batch_size: 50
+  device_name: "cuda:0"
+  lr: !!float 1e-5
+
+baseline_cifar10:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 100
+  pooling: 'original'
+  dataset:
+    dataset_name: 'CIFAR10'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+
+cifar10_avg_max: &cifar100
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 600
+  pooling: 'avg_max'
+  dataset:
+    dataset_name: 'CIFAR10'
+    batch_size: 64
+  device_name: "cuda:0"
+  lr: !!float 1e-5
+
+cifar10_weighted_avg_max:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 600
+  pooling: 'weighted_avg_max'
+  dataset:
+    dataset_name: 'CIFAR10'
+    batch_size: 64
+  device_name: "cuda:0"
+  lr: !!float 1e-5
+
+cifar10_sigmoid_avg_max:
+  <<: *cifar100
+  pooling: 'sigmoid_avg_max'
+  device_name: "cuda:1"
+
+
+cifar10_softmax_custom:
+  <<: *cifar100
+  pooling: 'softmax_custom'
+  device_name: "cuda:0"
+
+
+cifar10_geometric_mean:
+  <<: *cifar100
+  pooling: 'geometric_mean'
+  device_name: "cuda:1"
+
+cifar10_harmonic_mean:
+  <<: *cifar100
+  pooling: 'harmonic_mean'
+  device_name: "cuda:0"
+
+cifar10_fix_adaptive:
+  <<: *cifar100
+  pooling: 'fix_adaptive'
+  device_name: "cuda:1"
+
+
+
+
+fmnist:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 100
+  pooling: 'original'
+  dataset:
+    dataset_name: 'fashion_mnist'
+    batch_size: 50
+  device_name: "cuda:0"
+  lr: !!float 1e-5
+
+fmnist_avg_max: &fmnist
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 10
+  pooling: 'avg_max'
+  dataset:
+    dataset_name: 'fashion_mnist'
+    batch_size: 50
+  device_name: "cuda:0"
+  lr: !!float 1e-5
+
+fmnist_weighted_avg_max:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 10
+  pooling: 'weighted_avg_max'
+  dataset:
+    dataset_name: 'fashion_mnist'
+    batch_size: 50
+  device_name: "cuda:0"
+  lr: !!float 1e-5
+
+fmnist_sigmoid_avg_max:
+  <<: *fmnist
+  pooling: 'sigmoid_avg_max'
+  device_name: "cuda:0"
+
+
+fmnist_softmax_custom:
+  <<: *fmnist
+  pooling: 'softmax_custom'
+  device_name: "cuda:0"
+
+
+fmnist_geometric_mean:
+  <<: *fmnist
+  pooling: 'geometric_mean'
+  device_name: "cuda:1"
+
+fmnist_harmonic_mean:
+  <<: *fmnist
+  pooling: 'harmonic_mean'
+  device_name: "cuda:1"
+
+fmnist_fix_adaptive:
+  <<: *fmnist
+  pooling: 'fix_adaptive'
+  device_name: "cuda:0"
+
+
+KMNIST_avg:
+  <<: *fmnist
+  num_epochs: 70
+  dataset:
+    dataset_name: 'KMNIST'
+    batch_size: 50
+  pooling: 'original'
+  device_name: "cuda:1"
+
+
+KMNIST_avg_max: &KMNIST
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 70
+  pooling: 'avg_max'
+  dataset:
+    dataset_name: 'KMNIST'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+KMNIST_weighted_avg_max:
+  <<: *base
+  model_name: 'custom_cnn'
+  num_epochs: 70
+  pooling: 'weighted_avg_max'
+  dataset:
+    dataset_name: 'KMNIST'
+    batch_size: 50
+  device_name: "cuda:1"
+  lr: !!float 1e-5
+
+KMNIST_sigmoid_avg_max:
+  <<: *KMNIST
+  pooling: 'sigmoid_avg_max'
+  device_name: "cuda:0"
+
+
+KMNIST_softmax_custom:
+  <<: *KMNIST
+  pooling: 'softmax_custom'
+  device_name: "cuda:0"
+
+KMNIST_geometric_mean:
+  <<: *KMNIST
+
+  pooling: 'geometric_mean'
+  device_name: "cuda:1"
+
+KMNIST_harmonic_mean:
+  <<: *KMNIST
+  pooling: 'harmonic_mean'
+  device_name: "cuda:1"
+
+KMNIST_fix_adaptive:
+  <<: *KMNIST
+  pooling: 'fix_adaptive'
+  device_name: "cuda:1"
